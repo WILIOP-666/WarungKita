@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesanan Online - WarungKita</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B35',
+                        secondary: '#2EC4B6',
+                        dark: '#1A535C',
+                        light: '#F7FFF7',
+                        accent: '#FFE66D',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="bg-dark text-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="../index.html" class="flex items-center space-x-2">
+                    <i class="fas fa-store text-accent text-2xl"></i>
+                    <span class="font-bold text-xl">WarungKita</span>
+                </a>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="../index.html" class="hover:text-accent transition">Beranda</a>
+                <a href="stok.html" class="hover:text-accent transition">Manajemen Stok</a>
+                <a href="pesanan.html" class="text-accent font-bold">Pesanan</a>
+                <a href="promosi.html" class="hover:text-accent transition">Promosi</a>
+                <a href="analitik.html" class="hover:text-accent transition">Analitik</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-dark-800 pb-4 px-4">
+            <a href="../index.html" class="block py-2 hover:text-accent transition">Beranda</a>
+            <a href="stok.html" class="block py-2 hover:text-accent transition">Manajemen Stok</a>
+            <a href="pesanan.html" class="block py-2 text-accent font-bold">Pesanan</a>
+            <a href="promosi.html" class="block py-2 hover:text-accent transition">Promosi</a>
+            <a href="analitik.html" class="block py-2 hover:text-accent transition">Analitik</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-dark mb-6">Pesanan Online</h1>
+        
+        <!-- Tabs -->
+        <div class="mb-8">
+            <div class="flex border-b border-gray-200">
+                <button id="tab-pesanan-baru" class="py-2 px-4 font-medium text-primary border-b-2 border-primary">Pesanan Baru</button>
+                <button id="tab-riwayat-pesanan" class="py-2 px-4 font-medium text-gray-500 hover:text-primary">Riwayat Pesanan</button>
+            </div>
+        </div>
+        
+        <!-- Pesanan Baru Tab Content -->
+        <div id="pesanan-baru-content" class="space-y-6">
+            <!-- Filter and Search -->
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4">
+                    <div class="flex-1">
+                        <div class="relative">
+                            <input type="text" id="search-pesanan" placeholder="Cari pesanan..." class="w-full border border-gray-300 rounded-lg py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-primary">
+                            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-48">
+                        <select id="filter-status" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary">
+                            <option value="">Semua Status</option>
+                            <option value="baru">Baru</option>
+                            <option value="diproses">Diproses</option>
+                            <option value="siap">Siap Diambil</option>
+                            <option value="selesai">Selesai</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pesanan List -->
+            <div class="space-y-4" id="pesanan-list">
+                <!-- Empty State -->
+                <div id="empty-pesanan" class="bg-white rounded-lg shadow-md p-8 text-center">
+                    <i class="fas fa-shopping-cart text-gray-400 text-5xl mb-4"></i>
+                    <p class="text-gray-500 mb-4">Belum ada pesanan baru.</p>
+                    <button id="buat-pesanan-btn" class="bg-primary text-white font-bold py-2 px-4 rounded-lg hover:bg-opacity-90 transition">
+                        <i class="fas fa-plus mr-2"></i> Buat Pesanan Manual
+                    </button>
+                </div>
+                
+                <!-- Sample Pesanan Card (will be hidden and populated by JS) -->
+                <div class="pesanan-card bg-white rounded-lg shadow-md overflow-hidden hidden">
+                    <div class="p-4 border-b border-gray-200">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-bold text-lg text-dark">Pesanan #12345</h3>
+                                <p class="text-gray-500 text-sm">12 Mei 2023, 14:30</p>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Diproses</span>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="mb-4">
+                            <p class="font-medium text-dark">Pelanggan:</p>
+                            <p>Budi Santoso</p>
+                            <p class="text-gray-500">0812-3456-7890</p>
+                        </div>
+                        <div class="mb-4">
+                            <p class="font-medium text-dark mb-2">Item:</p>
+                            <ul class="space-y-1">
+                                <li class="flex justify-between">
+                                    <span>Mie Instan x2</span>
+                                    <span>Rp 6.000</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span>Telur Ayam x6</span>
+                                    <span>Rp 12.000</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span>Minyak Goreng 1L</span>
+                                    <span>Rp 20.000</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="border-t border-gray-200 pt-3 flex justify-between">
+                            <p class="font-bold">Total:</p>
+                            <p class="font-bold">Rp 38.000</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-4 flex space-x-2">
+                        <button class="flex-1 bg-secondary text-white font-bold py-2 px-4 rounded-lg hover:bg-opacity-90 transition">
+                            <i class="fas fa-check mr-2"></i> Proses Pesanan
+                        </button>
+                        <button class="flex-1 bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-opacity-90 transition">
+                            <i class="fab fa-whatsapp mr-2"></i> Hubungi
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Riwayat Pesanan Tab Content -->
+        <div id="riwayat-pesanan-content" class="hidden space-y-6">
+            <!-- Filter and Search -->
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4">
+                    <div class="flex-1">
+                        <div class="relative">
+                            <input type="text" id="search-riwayat" placeholder="Cari riwayat pesanan..." class="w-full border border-gray-300 rounded-lg py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-primary">
+                            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-48">
+                        <select id="filter-bulan" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary"

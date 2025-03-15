@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WarungKita - Digitalisasi Warung Tradisional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B35',
+                        secondary: '#2EC4B6',
+                        dark: '#1A535C',
+                        light: '#F7FFF7',
+                        accent: '#FFE66D',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="bg-dark text-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-store text-accent text-2xl"></i>
+                <span class="font-bold text-xl">WarungKita</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="hover:text-accent transition">Beranda</a>
+                <a href="pages/stok.html" class="hover:text-accent transition">Manajemen Stok</a>
+                <a href="pages/pesanan.html" class="hover:text-accent transition">Pesanan</a>
+                <a href="pages/promosi.html" class="hover:text-accent transition">Promosi</a>
+                <a href="pages/analitik.html" class="hover:text-accent transition">Analitik</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-dark-800 pb-4 px-4">
+            <a href="#" class="block py-2 hover:text-accent transition">Beranda</a>
+            <a href="pages/stok.html" class="block py-2 hover:text-accent transition">Manajemen Stok</a>
+            <a href="pages/pesanan.html" class="block py-2 hover:text-accent transition">Pesanan</a>
+            <a href="pages/promosi.html" class="block py-2 hover:text-accent transition">Promosi</a>
+            <a href="pages/analitik.html" class="block py-2 hover:text-accent transition">Analitik</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-12 md:py-20 bg-gradient-to-r from-dark to-primary text-white">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <h1 class="text-3xl md:text-5xl font-bold mb-4">Digitalisasi Warung Tradisional</h1>
+                <p class="text-lg mb-6">Kelola stok, terima pesanan online, dan promosikan warung Anda dengan mudah</p>
+                <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                    <a href="pages/stok.html" class="bg-accent text-dark font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition text-center">Kelola Stok</a>
+                    <a href="pages/pesanan.html" class="bg-white text-primary font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition text-center">Lihat Pesanan</a>
+                </div>
+            </div>
+            <div class="md:w-1/2">
+                <img src="assets/images/warung-hero.svg" alt="Ilustrasi Warung" class="w-full max-w-md mx-auto">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-dark">Fitur Utama</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-light p-6 rounded-lg shadow-md hover:shadow-lg transition">
+                    <div class="bg-primary text-white rounded-full w-14 h-14 flex items-center justify-center mb-4">
+                        <i class="fas fa-box-open text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-dark">Manajemen Stok</h3>
+                    <p class="text-gray-600">Catat dan kelola stok barang dengan mudah. Dapatkan notifikasi saat stok menipis.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="bg-light p-6 rounded-lg shadow-md hover:shadow-lg transition">
+                    <div class="bg-primary text-white rounded-full w-14 h-14 flex items-center justify-center mb-4">
+                        <i class="fas fa-shopping-cart text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-dark">Pesan Online</h3>
+                    <p class="text-gray-600">Terima pesanan online dari pelanggan melalui WhatsApp atau formulir pesanan.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="bg-light p-6 rounded-lg shadow-md hover:shadow-lg transition">
+                    <div class="bg-primary text-white rounded-full w-14 h-14 flex items-center justify-center mb-4">
+                        <i class="fas fa-bullhorn text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-dark">Promosi Lokal</h3>
+                    <p class="text-gray-600">Buat dan bagikan promosi atau diskon untuk menarik lebih banyak pelanggan.</p>
+                </div>
+                <!-- Feature 4 -->
+                <div class="bg-light p-6 rounded-lg shadow-md hover:shadow-lg transition">
+                    <div class="bg-primary text-white rounded-full w-14 h-14 flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-dark">Analitik Sederhana</h3>
+                    <p class="text-gray-600">Lihat barang terlaris dan analisis penjualan untuk mengembangkan bisnis Anda.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-dark">Testimoni Pemilik Warung</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        <div>
+                            <h4 class="font-bold">Ibu Siti</h4>
+                            <p class="text-gray-600 text-sm">Warung Berkah, Jakarta</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"Sejak menggunakan WarungKita, saya bisa mengatur stok dengan lebih baik dan tidak lagi kehabisan barang yang laris."</p>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        <div>
+                            <h4 class="font-bold">Pak Budi</h4>
+                            <p class="text-gray-600 text-sm">Warung Sejahtera, Bandung</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"Pelanggan saya senang bisa memesan lewat WhatsApp. Penjualan meningkat 30% sejak menggunakan sistem ini."</p>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        <div>
+                            <h4 class="font-bold">Ibu Dewi</h4>
+                            <p class="text-gray-600 text-sm">Warung Makmur, Surabaya</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"Fitur promosi membantu saya menghabiskan stok yang hampir kadaluarsa. Sangat membantu untuk mengurangi kerugian."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Siap Digitalisasi Warung Anda?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Mulai kelola warung Anda dengan lebih efisien dan tingkatkan penjualan hari ini!</p>
+            <a href="pages/stok.html" class="bg-white text-primary font-bold py-3 px-8 rounded-lg hover:bg-accent hover:text-dark transition inline-block">Mulai Sekarang</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-store text-accent text-2xl"></i>
+                        <span class="font-bold text-xl">WarungKita</span>
+                    </div>
+                    <p class="text-gray-400 max-w-xs">Platform digitalisasi untuk membantu pemilik warung tradisional mengelola bisnis dengan lebih efisien.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Fitur</h4>
+                        <ul class="space-y-2">
+                            <li><a href="pages/stok.html" class="text-gray-400 hover:text-accent">Manajemen Stok</a></li>
+                            <li><a href="pages/pesanan.html" class="text-gray-400 hover:text-accent">Pesanan Online</a></li>
+                            <li><a href="pages/promosi.html" class="text-gray-400 hover:text-accent">Promosi Lokal</a></li>
+                            <li><a href="pages/analitik.html" class="text-gray-400 hover:text-accent">Analitik</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Bantuan</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-accent">FAQ</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-accent">Kontak</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-accent">Panduan</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-span-2 md:col-span-1">
+                        <h4 class="font-bold text-lg mb-4">Hubungi Kami</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-center space-x-2">
+                                <i class="fas fa-envelope text-accent"></i>
+                                <span class="text-gray-400">info@warungkita.id</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <i class="fas fa-phone text-accent"></i>
+                                <span class="text-gray-400">+62 123 4567 890</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center md:text-left">
+                <p class="text-gray-400">&copy; 2023 WarungKita. Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Stok - WarungKita</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B35',
+                        secondary: '#2EC4B6',
+                        dark: '#1A535C',
+                        light: '#F7FFF7',
+                        accent: '#FFE66D',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="bg-dark text-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="../index.html" class="flex items-center space-x-2">
+                    <i class="fas fa-store text-accent text-2xl"></i>
+                    <span class="font-bold text-xl">WarungKita</span>
+                </a>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="../index.html" class="hover:text-accent transition">Beranda</a>
+                <a href="stok.html" class="text-accent font-bold">Manajemen Stok</a>
+                <a href="pesanan.html" class="hover:text-accent transition">Pesanan</a>
+                <a href="promosi.html" class="hover:text-accent transition">Promosi</a>
+                <a href="analitik.html" class="hover:text-accent transition">Analitik</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-dark-800 pb-4 px-4">
+            <a href="../index.html" class="block py-2 hover:text-accent transition">Beranda</a>
+            <a href="stok.html" class="block py-2 text-accent font-bold">Manajemen Stok</a>
+            <a href="pesanan.html" class="block py-2 hover:text-accent transition">Pesanan</a>
+            <a href="promosi.html" class="block py-2 hover:text-accent transition">Promosi</a>
+            <a href="analitik.html" class="block py-2 hover:text-accent transition">Analitik</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-dark mb-6">Manajemen Stok</h1>
+        
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 mb-8">
+            <button id="tambah-stok-btn" class="bg-primary text-white font-bold py-2 px-4 rounded-lg hover:bg-opacity-90 transition flex items-center">
+                <i class="fas fa-plus mr-2"></i> Tambah Barang
+            </button>
+            <button id="export-btn" class="bg-secondary text-white font-bold py-2 px-4 rounded-lg hover:bg-opacity-90 transition flex items-center">
+                <i class="fas fa-file-export mr-2"></i> Export Data
+            </button>
+            <button id="import-btn" class="bg-dark text-white font-bold py-2 px-4 rounded-lg hover:bg-opacity-90 transition flex items-center">
+                <i class="fas fa-file-import mr-2"></i> Import Data
+            </button>
+        </div>
+
+        <!-- Search and Filter -->
+        <div class="bg-white p-4 rounded-lg shadow-md mb-6">
+            <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4">
+                <div class="flex-1">
+                    <div class="relative">
+                        <input type="text" id="search-input" placeholder="Cari barang..." class="w-full border border-gray-300 rounded-lg py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-primary">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+                </div>
+                <div class="w-full md:w-48">
+                    <select id="kategori-filter" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option value="">Semua Kategori</option>
+                        <option value="makanan">Makanan</option>
+                        <option value="minuman">Minuman</option>
+                        <option value="sembako">Sembako</option>
+                        <option value="lainnya">Lainnya</option>
+                    </select>
+                </div>
+                <div class="w-full md:w-48">
+                    <select id="stok-filter" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option value="">Semua Stok</option>
+                        <option value="habis">Stok Habis</option>
+                        <option value="kritis">Stok Kritis</option>
+                        <option value="cukup">Stok Cukup</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stock Table -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full table-auto">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="px-4 py-3 text-left text-dark font-bold">Nama Barang</th>
+                            <th class="px-4 py-3 text-left text-dark font-bold">Kategori</th>
+                            <th class="px-4 py-3 text-left text-dark font-bold">Harga</th>
+                            <th class="px-4 py-3 text-left text-dark font-bold">Stok</th>
+                            <th class="px-4 py-3 text-left text-dark font-bold">Status</th>
+                            <th class="px-4 py-3 text-left text-dark font-bold">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stok-table-body">
+                        <!-- Data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="empty-state" class="py-8 text-center hidden">
+                <i class="fas fa-box-open text-gray-400 text-5xl mb-4"></i>
+                <p class="text-gray-500">Belum ada data stok. Klik tombol "Tambah Barang" untuk menambahkan.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Item Modal -->
+    <div id="item-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-md mx-4">
+            <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+                <h3 id="modal-title" class="text-xl font-bold text-dark">Tambah Barang Baru</h3>
+                <button id="close-modal" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-4">
+                <form id="item-form">
+                    <input type="hidden" id="item-id">
+                    <div class="mb-4">
+                        <label for="nama-barang" class="block text-gray-700 font-medium mb-2">Nama Barang</label>
+                        <input type="text" id="nama-barang" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="kategori" class="block text-gray-700 font-medium mb-2">Kategori</label>
+                        <select id="kategori" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary" required>
+                            <option value="">Pilih Kategori</option>
+                            <option value="makanan">Makanan</option>
+                            <option value="minuman">Minuman</option>
+                            <option value="sembako">Sembako</option>
+                            <option value="lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="harga" class="block text-gray-700 font-medium mb-2">Harga (Rp)</label>
+                        <input type="number" id="harga" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary" min="0" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="stok" class="block text-gray-700 font-medium mb-2">Jumlah Stok</label>
+                        <input type="number" id="stok" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary" min="0" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="stok-minimum" class="block text-gray-700 font-medium mb-2">Stok Minimum (Peringatan)</label>
+                        <input type="number" id="stok-minimum" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary" min="0" required>
+                    </div>
+                    <div class="flex justify-end space-x-3">
+                        <button type="button" id="cancel-form" class="bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-400 transition">Batal</button>
+                        <button type="submit" class="bg-primary text-white font-bold py-2 px-4 rounded-lg hover:bg-opacity-90 transition">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-md mx-4">
+            <div class="p-4 border-b border-gray-200">
+                <h3 class="text-xl font-bold text-dark">Konfirmasi Hapus</h3>
+            </div>
+            <div class="p-4">
+                <p class="text-gray-700 mb-4">Apakah Anda yakin ingin menghapus barang <span id="delete-item-name" class="font-bold"></span>?</p>
+                <div class="flex justify-end space-x-3">
+                    <button id="cancel-delete" class="bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-400 transition">Batal</button>
+                    <button id="confirm-delete" class="bg-red-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-600 transition">Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-store text-accent text-2xl"></i>
+                        <span class="font-bold text-xl">WarungKita</span>
+                    </div>
+                    <p class="text-gray-400 max-w-xs">Platform digitalisasi untuk membantu pemilik warung tradisional mengelola bisnis dengan lebih efisien.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Fitur</h4>
+                        <ul class="space-y-2">
+                            <li><a href="stok.html" class="text-accent">Manajemen Stok</a></li>
+                            <li><a href="pesanan.html" class="text-gray-400 hover:text-accent">Pesanan Online</a></li>
+                            <li><a href="promosi.html" class="text-gray-400 hover:text-accent">Promosi Lokal</a></li>
+                            <li><a href="analitik.html" class="text-gray-400 hover:text-accent">Analitik

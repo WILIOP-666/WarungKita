@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <!-- Store Building -->
+  <rect x="200" y="200" width="400" height="300" fill="#F7FFF7" stroke="#1A535C" stroke-width="8"/>
+  
+  <!-- Roof -->
+  <polygon points="150,200 400,100 650,200" fill="#FF6B35" stroke="#1A535C" stroke-width="8"/>
+  
+  <!-- Door -->
+  <rect x="350" y="350" width="100" height="150" fill="#2EC4B6" stroke="#1A535C" stroke-width="4"/>
+  <circle cx="430" cy="425" r="8" fill="#FFE66D"/>
+  
+  <!-- Windows -->
+  <rect x="250" y="250" width="80" height="80" fill="#2EC4B6" stroke="#1A535C" stroke-width="4"/>
+  <rect x="470" y="250" width="80" height="80" fill="#2EC4B6" stroke="#1A535C" stroke-width="4"/>
+  
+  <!-- Window Panes -->
+  <line x1="290" y1="250" x2="290" y2="330" stroke="#1A535C" stroke-width="2"/>
+  <line x1="250" y1="290" x2="330" y2="290" stroke="#1A535C" stroke-width="2"/>
+  <line x1="510" y1="250" x2="510" y2="330" stroke="#1A535C" stroke-width="2"/>
+  <line x1="470" y1="290" x2="550" y2="290" stroke="#1A535C" stroke-width="2"/>
+  
+  <!-- Sign -->
+  <rect x="300" y="150" width="200" height="50" fill="#FFE66D" stroke="#1A535C" stroke-width="4"/>
+  <text x="400" y="185" font-family="Arial" font-size="24" text-anchor="middle" fill="#1A535C" font-weight="bold">WarungKita</text>
+  
+  <!-- Products -->
+  <rect x="220" y="500" width="360" height="20" fill="#1A535C"/>
+  
+  <!-- Product Items -->
+  <rect x="240" y="480" width="30" height="20" fill="#FF6B35"/>
+  <rect x="280" y="470" width="30" height="30" fill="#2EC4B6"/>
+  <rect x="320" y="460" width="30" height="40" fill="#FFE66D"/>
+  <rect x="360" y="475" width="30" height="25" fill="#FF6B35"/>
+  <rect x="400" y="465" width="30" height="35" fill="#2EC4B6"/>
+  <rect x="440" y="480" width="30" height="20" fill="#FFE66D"/>
+  <rect x="480" y="470" width="30" height="30" fill="#FF6B35"/>
+  <rect x="520" y="475" width="30" height="25" fill="#2EC4B6"/>
+  
+  <!-- Digital Elements -->
+  <circle cx="650" cy="150" r="40" fill="#2EC4B6" opacity="0.8"/>
+  <text x="650" y="155" font-family="Arial" font-size="12" text-anchor="middle" fill="#1A535C">Digital</text>
+  
+  <circle cx="700" cy="200" r="30" fill="#FF6B35" opacity="0.8"/>
+  <text x="700" y="205" font-family="Arial" font-size="10" text-anchor="middle" fill="#F7FFF7">Online</text>
+  
+  <circle cx="670" cy="250" r="35" fill="#FFE66D" opacity="0.8"/>
+  <text x="670" y="255" font-family="Arial" font-size="11" text-anchor="middle" fill="#1A535C">Stok</text>
+</svg>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analitik - WarungKita</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B35',
+                        secondary: '#2EC4B6',
+                        dark: '#1A535C',
+                        light: '#F7FFF7',
+                        accent: '#FFE66D',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="bg-dark text-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="../index.html" class="flex items-center space-x-2">
+                    <i class="fas fa-store text-accent text-2xl"></i>
+                    <span class="font-bold text-xl">WarungKita</span>
+                </a>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="../index.html" class="hover:text-accent transition">Beranda</a>
+                <a href="stok.html" class="hover:text-accent transition">Manajemen Stok</a>
+                <a href="pesanan.html" class="hover:text-accent transition">Pesanan</a>
+                <a href="promosi.html" class="hover:text-accent transition">Promosi</a>
+                <a href="analitik.html" class="text-accent font-bold">Analitik</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-dark-800 pb-4 px-4">
+            <a href="../index.html" class="block py-2 hover:text-accent transition">Beranda</a>
+            <a href="stok.html" class="block py-2 hover:text-accent transition">Manajemen Stok</a>
+            <a href="pesanan.html" class="block py-2 hover:text-accent transition">Pesanan</a>
+            <a href="promosi.html" class="block py-2 hover:text-accent transition">Promosi</a>
+            <a href="analitik.html" class="block py-2 text-accent font-bold">Analitik</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-dark mb-6">Analitik Bisnis</h1>
+        
+        <!-- Filter -->
+        <div class="bg-white p-4 rounded-lg shadow-md mb-8">
+            <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4">
+                <div class="w-full md:w-48">
+                    <label for="period-filter" class="block text-gray-700 font-medium mb-2">Periode</label>
+                    <select id="period-filter" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option value="7">7 Hari Terakhir</option>
+                        <option value="30" selected>30 Hari Terakhir</option>
+                        <option value="90">90 Hari Terakhir</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Total Penjualan -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-gray-500">Total Penjualan</h3>
+                    <div class="bg-primary bg-opacity-10 p-3 rounded-full">
+                        <i class="fas fa-shopping-cart text-primary"></i>
+                    </div>
+                </div>
+                <p class="text-2xl font-bold text-dark" id="total-sales">Rp 0</p>
+                <p class="text-sm text-gray-500">30 hari terakhir</p>
+            </div>
+            
+            <!-- Jumlah Pesanan -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-gray-500">Jumlah Pesanan</h3>
+                    <div class="bg-secondary bg-opacity-10 p-3 rounded-full">
+                        <i class="fas fa-receipt text-secondary"></i>
+                    </div>
+                </div>
+                <p class="text-2xl font-bold text-dark" id="order-count">0</p>
+                <p class="text-sm text-gray-500">30 hari terakhir</p>
+            </div>
+            
+            <!-- Stok Kritis -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-gray-500">Stok Kritis</h3>
+                    <div class="bg-yellow-100 p-3 rounded-full">
+                        <i class="fas fa-exclamation-triangle text-yellow-500"></i>
+                    </div>
+                </div>
+                <p class="text-2xl font-bold text-dark" id="critical-stock">0</p>
+                <p class="text-sm text-gray-500">Barang perlu diisi ulang</p>
+            </div>
+            
+            <!-- Stok Habis -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-gray-500">Stok Habis</h3>
+                    <div class="bg-red-100 p-3 rounded-full">
+                        <i class="fas fa-times-circle text-red-500"></i>
+                    </div>
+                </div>
+                <p class="text-2xl font-bold text-dark" id="out-of-stock">0</p>
+                <p class="text-sm text-gray-500">Barang tidak tersedia</p>
+            </div>
+        </div>
+        
+        <!-- Charts -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Sales Chart -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="font-bold text-lg text-dark mb-4">Penjualan Harian</h3>
+                <div class="h-64">
+                    <canvas id="sales-chart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Top Products Chart -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="font-bold text-lg text-dark mb-4">Produk Terlaris</h3>
+                <div class="h-64">
+                    <canvas id="products-chart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tables -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Recent Orders -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-4 border-b border-gray-200">
+                    <h3 class="font-bold text-lg text-dark">Pesanan Terbaru</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full table-auto">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-dark font-bold">ID</th>
+                                <th class="px-4 py-3 text-left text-dark font-bold">Pelanggan</th>
+                                <th class="px-4 py-3 text-left text-dark font-bold">Tanggal</th>
+                                <th class="px-4 py-3 text-left text-dark font-bold">Total</th>
+                                <th class="px-4 py-3 text-left text-dark font-bold">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recent-orders">
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="empty-orders" class="py-8 text-center hidden">
+                    <p class="text-gray-500">Belum ada data pesanan.</p>
+                </div>
+            </div>
+            
+            <!-- Low Stock Items -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-4 border-b border-gray-200">
+                    <h3 class="font-bold text-lg text-dark">Stok Menipis</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full table-auto">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-dark font-bold">Nama Barang</th>
+                                <th class="px-4 py-3 text-left text-dark font-bold">Kategori</th>
+                                <th class="px-4 py-3 text-left text-dark font-bold">Stok</th>
+                                <th class="px-4 py-3 text-left text-dark font-bold">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="low-stock-items">
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="empty-stock" class="py-8 text-center hidden">
+                    <p class="text-gray-500">Tidak ada barang dengan stok menipis.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-store text-accent text-2xl"></i>
+                        <span class="font-bold text-xl">WarungKita</span>
+                    </div>
+                    <p class="text-gray-400 max-w-xs">Platform digitalisasi untuk membantu pemilik warung tradisional mengelola bisnis dengan lebih efisien.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Fitur</h4>
+                        <ul class="space-y-2">
+                            <li><a href="stok.html" class="text-gray-400 hover:text-accent">Manajemen Stok</a></li>
+                            <li><a href="pesanan.html" class="text-gray-400 hover:text-accent">Pesanan Online</a></li>
+                            <li><a href="promosi.html" class="text-gray-400 hover:text-accent">Promosi Lokal</a></li>
+                            <li><a href="analitik.html" class="text-accent">Analitik</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Bantuan</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-accent">FAQ</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-accent">Kontak</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-accent">Panduan</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center md:text-left">
+                <p class="text-gray-400">&copy; 2023 WarungKita. Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/analitik.js"></script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promosi - WarungKita</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B35',
+                        secondary: '#2EC4B6',
+                        dark: '#1A535C',
+                        light: '#F7FFF7',
+                        accent: '#FFE66D',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="bg-dark text-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="../index.html" class="flex items-center space-x-2">
+                    <i class="fas fa-store text-accent text-2xl"></i>
+                    <span class="font-bold text-xl">WarungKita</span>
+                </a>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="../index.html" class="hover:text-accent transition">Beranda</a>
+                <a href="stok.html" class="hover:text-accent transition">Manajemen Stok</a>
+                <a href="pesanan.html" class="hover:text-accent transition">Pesanan</a>
+                <a href="promosi.html" class="text-accent font-bold">Promosi</a>
+                <a href="analitik.html" class="hover:text-accent transition">Analitik</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-dark-800 pb-4 px-4">
+            <a href="../index.html" class="block py-2 hover:text-accent transition">Beranda</a>
+            <a href="stok.html" class="block py-2 hover:text-accent transition">Manajemen Stok</a>
+            <a href="pesanan.html" class="block py-2 hover:text-accent transition">Pesanan</a>
+            <a href="promosi.html" class="block py-2 text-accent font-bold">Promosi</a>
+            <a href="analitik.html" class="block py-2 hover:text-accent transition">Analitik</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-dark mb-6">Promosi Lokal</h1>
+        
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 mb-8">
+            <button id="tambah-promosi-btn" class="bg-primary text-white font-bold py-2 px-4 rounded-lg hover:bg-opacity-90 transition flex items-center">
+                <i class="fas fa-plus mr-2"></i> Tambah Promosi
+            </button>
+            <button id="share-wa-btn" class="bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-opacity-90 transition flex items-center">
+                <i class="fab fa-whatsapp mr-2"></i> Bagikan ke WhatsApp
+            </button>
+        </div>
+
+        <!-- Active Promotions -->
+        <div class="mb-10">
+            <h2 class="text-xl font-bold text-dark mb-4">Promosi Aktif</h2>
+            <div id="active-promotions" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Empty State -->
+                <div id="empty-promotions" class="col-span-full bg-white rounded-lg shadow-md p-8 text-center">
+                    <i class="fas fa-bullhorn text-gray-400 text-5xl mb-4"></i>
+                    <p class="text-gray-500 mb-4">Belum ada promosi aktif.</p>
+                    <p class="text-gray-500">Klik tombol "Tambah Promosi" untuk membuat promosi baru.</p>
+                </div>
+                
+                <!-- Sample Promotion Card (will be hidden and populated by JS) -->
+                <div class="promo-card bg-white rounded-lg shadow-md overflow-hidden hidden">
+                    <div class="bg-accent h-2"></div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-bold text-lg text-dark">Diskon Sembako 10%</h3>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Aktif</span>
+                        </div>
+                        <p class="text-gray-600 mb-3">Diskon 10% untuk semua produk sembako. Berlaku hingga 30 Juni 2023.</p>
+                        <div class="flex justify-between items-center text-sm text-gray-500 mb-4">
+                            <span><i class="far fa-calendar-alt mr-1"></i> 1 - 30 Juni 2023</span>
+                        </div>
+                        <div class="border-t border-gray-200 pt-3 flex justify-end space-x-2">
+                            <button class="edit-promo text-secondary hover:text-dark transition">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="delete-promo text-red-500 hover:text-red-700 transition">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Promotion Templates -->
+        <div>
+            <h2 class="text-xl font-bold text-dark mb-4">Template Promosi</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Template 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-primary h-2"></div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg text-dark mb-3">Diskon Produk</h3>
+                        <p class="text-gray-600 mb-4">Template untuk promosi diskon pada produk tertentu.</p>
+                        <button class="use-template bg-secondary text-white font-bold py-2 px-4 rounded-lg hover:bg-opacity-90 transition w-full" data-template="diskon">
+                            Gunakan Template
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Template 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-accent h-2"></div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg text-dark mb-3">Beli 1 Gratis 1</h3>
+                        <p class="text-gray-600 mb-4">Template untuk promosi beli satu gratis satu.</p>
+                        <button class="use-template bg-secondary text-white font-bold py-2 px-4 rounded-lg hover:bg-opacity-90 transition w-full" data-template="beli1gratis1">
+                            Gunakan Template
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Template 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-secondary h-2"></div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg text-dark mb-3">Paket Hemat</h3>
+                        <p class="text-gray-600 mb-4">Template untuk promosi paket hemat dengan harga spesial.</p>
+                        <button class="use-template bg-secondary text-white font-bold py-2 px-4 rounded-lg hover:bg-opacity-90 transition w-full" data-template="paket">
+                            Gunakan Template
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Promotion Modal -->
+    <div id="promo-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-md mx-4">
+            <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+                <h3 id="modal-title" class="text-xl font-bold text-dark">Tambah Promosi Baru</h3>
+                <button id="close-modal" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-4">
+                <form id="promo-form">
+                    <input type="hidden" id="promo-id">
+                    <div class="mb-4">
+                        <label for="judul-promosi" class="block text-gray-700 font-medium mb-2">Judul Promosi</label>
+                        <input type="text" id="judul-promosi" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="deskripsi-promosi" class="block text-gray-700 font-medium mb-2">Deskripsi</label>
+                        <textarea id="deskripsi-promosi" rows="3" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary" required></textarea>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label for="tanggal-mulai" class="block text-gray-700 font-medium mb-2">Tanggal Mulai</label>
+                            <input type="date" id="tanggal-mulai" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary" required>
+                        </div>
+                        <div>
+                            <label for="tanggal-selesai" class="block text-gray-700 font-medium mb-2">Tanggal Selesai</label>
+                            <input type="date" id="tanggal-selesai" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary" required>
+                        </div>
+                    </div>
+                    <div class="flex justify-end space-x-3">
+                        <button type="button" id="cancel-form" class="bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-400 transition">Batal</button>
+                        <button type="submit" class="bg-primary text-white font-bold py-2 px-4 rounded-lg hover:bg-opacity-90 transition">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-md mx-4">
+            <div class="p-4 border-b border-gray-200">
+                <h3 class="text-xl font-bold text-dark">Konfirmasi Hapus</h3>
+            </div>
+            <div class="p-4">
+                <p class="text-gray-700 mb-4">Apakah Anda yakin ingin menghapus promosi <span id="delete-promo-name" class="font-bold"></span>?</p>
+                <div class="flex justify-end space-x-3">
+                    <button id="cancel-delete" class="bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-400 transition">Batal</button>
+                    <button id="confirm-delete" class="bg-red-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-600 transition">Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Share Modal -->
+    <div id="share-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-md mx-4">
+            <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+                <h3 class="text-xl font-bold text-dark">Bagikan Promosi ke WhatsApp</h3>
+                <button id="close-share-modal" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-4">
+                <div class="mb-4">
+                    <label for="share-message" class="block text-gray-700 font-medium mb-2">Pesan</label>
+                    <textarea id="share-message" rows="5" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="phone-number" class="block text-gray-700 font-medium mb-2">Nomor WhatsApp (opsional)</label>
+                    <input type="tel" id="phone-number" placeholder="Contoh: 08123456789" class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary">
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" id="cancel-share" class="bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-400 transition">Batal</button>
+                    <button type="button" id="confirm-share" class="bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition">Bagikan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/promosi.js"></script>
+</body>
+</html>
