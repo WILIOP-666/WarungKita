@@ -1,5 +1,3 @@
-# WarungKita
-
 # WarungKita - Digitalisasi Warung Tradisional
 
 ![WarungKita](assets/images/warung-hero.svg)
