@@ -48,7 +48,7 @@ WarungKita adalah aplikasi web berbasis client-side yang tidak memerlukan server
 
 1. Clone repositori ini:
    ```
-   git clone https://github.com/username/warungkita.git
+   git clone https://github.com/WILIOP-666/WarungKita.git
    ```
 
 2. Buka file `index.html` di browser web Anda
